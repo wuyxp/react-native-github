@@ -5,13 +5,17 @@
  */
 
 import React, {Component} from 'react';
+import { Provider } from 'react-redux'
+import store from './store'
 import Router from './Router'
 
 type Props = {};
 export default class App extends Component<Props> {
     render() {
         return (
-            <Router />
+            <Provider store={store}>
+                <Router />
+            </Provider>
         );
     }
 }
