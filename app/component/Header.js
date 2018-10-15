@@ -5,9 +5,10 @@
  */
 import React,{ Component } from 'react'
 import { connect } from 'react-redux'
+import {withNavigation} from 'react-navigation'
 import _ from 'lodash'
 import PropsType from 'prop-types'
-import {Header, Left, Body, Right, Title, Text} from 'native-base'
+import {Header, Left, Body, Right, Title, Text, Icon, Button} from 'native-base'
 import { StatusBar } from 'react-native'
 
 class HeaderComponent extends Component{
@@ -15,7 +16,11 @@ class HeaderComponent extends Component{
         return (
             <Header  style={{backgroundColor: this.props.backgroundColor}}>
                 <StatusBar barStyle={"light-content"}/>
-                <Left></Left>
+                <Left>
+                    {
+                        this.props.leftComponent ? this.props.leftComponent : null
+                    }
+                </Left>
                 <Body>
                     <Title style={{color: "#ffffff"}}>{this.props.title}</Title>
                 </Body>
@@ -24,13 +29,24 @@ class HeaderComponent extends Component{
         );
     }
     static PropsType = {
-        title: PropsType.string
+        title: PropsType.string,
+        leftComponent: PropsType.element
     }
     static defaultProps = {
         title: ''
     }
 }
+class LeftReturnComponent extends Component{
+    render() {
+        return (
+            <Button transparent onPress={() => {this.props.navigation.goBack()}}>
+                <Icon name="ios-arrow-back" style={{color: '#ffffff'}}/>
+            </Button>
+        )
+    }
+}
+export const LeftReturn = withNavigation(LeftReturnComponent);
 const mapStateToProps = state => ({backgroundColor: _.get(state,'theme.color','')});
 const mapDispatchToProps = () => ({});
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(HeaderComponent));
 

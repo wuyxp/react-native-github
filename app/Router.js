@@ -4,7 +4,7 @@
  * @time: 2018/10/12 下午2:49
  */
 import React from 'react'
-import { createBottomTabNavigator } from 'react-navigation'
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import Icons from 'react-native-vector-icons/Ionicons'
 
 import Favorite from './view/Favorite'
@@ -12,13 +12,16 @@ import Popular from './view/Popular'
 import Trending from './view/Trending'
 import My from './view/My'
 
-export default createBottomTabNavigator({
-    Favorite,
-    Popular,
-    Trending,
-    My,
+import ColorList from './view/my/ColorList'
+
+const BottomTab = createBottomTabNavigator({
+    Favorite: {screen: Favorite},
+    Popular: {screen: Popular},
+    Trending: {screen: Trending},
+    My: {screen: My},
 },{
-    initialRouteName: 'Favorite',
+    // initialRouteName: 'Favorite',
+    initialRouteName: 'My',
     navigationOptions: ({navigation}) => ({
         tabBarIcon: ({focused, horizontal, tintColor}) => {
             const {routeName} = navigation.state;
@@ -41,4 +44,13 @@ export default createBottomTabNavigator({
             fontSize: 12,
         },
     },
+})
+
+export default createStackNavigator({
+    BottomTab,
+    ColorList: {screen: ColorList},
+},{
+    navigationOptions: {
+        header: null
+    }
 })
