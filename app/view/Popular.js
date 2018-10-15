@@ -4,16 +4,17 @@
  * @time: 2018/10/12 下午2:52
  */
 import React, {Component} from 'react'
-import {View, Text} from 'native-base'
+import {Container, View, Text} from 'native-base'
+import Header from '../component/Header'
 
 export default class ViewScreen extends Component {
     render() {
         return (
-            <View>
-                <Text>
-                    Popular
-                </Text>
-            </View>
+            <Container>
+                <Header
+                    title={"Popular"}
+                />
+            </Container>
         )
     }
 }
