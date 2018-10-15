@@ -6,6 +6,8 @@
 import React from 'react'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import Icons from 'react-native-vector-icons/Ionicons'
+import store from './store'
+import {connect} from 'react-redux'
 
 import Favorite from './view/Favorite'
 import Popular from './view/Popular'
@@ -37,20 +39,29 @@ const BottomTab = createBottomTabNavigator({
             }
             return <Icons name={iconName} size={horizontal ? 20 : 25} color={tintColor}/>
         },
-    }),
-    tabBarOptions:{
-        activeTintColor: '#e91e63',
-        labelStyle: {
-            fontSize: 12,
+        tabBarOptions:{
+            activeTintColor: store.getState()['theme']['color'],
+            // activeTintColor: this.props.theme.color,
+            labelStyle: {
+                fontSize: 12,
+            },
         },
-    },
+    }),
 })
 
-export default createStackNavigator({
+const StackNavigator = createStackNavigator({
     BottomTab,
     ColorList: {screen: ColorList},
 },{
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
         header: null
+    })
+});
+
+const mapStateToProps = state => {
+    return {
+        theme: state.theme
     }
-})
+}
+
+export default connect(mapStateToProps)(StackNavigator)

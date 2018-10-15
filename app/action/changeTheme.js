@@ -6,7 +6,9 @@
 
 export const CHANGE_THEME = Symbol();
 
-export const changeTheme = theme => ({
+export const changeTheme = color => ({
     type: CHANGE_THEME,
-    theme,
+    theme: {
+        color
+    },
 })
