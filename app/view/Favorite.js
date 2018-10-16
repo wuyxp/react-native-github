@@ -6,7 +6,7 @@
 import React, {Component} from 'react'
 import { FlatList } from 'react-native'
 import {connect} from 'react-redux'
-import {Container, View, Text, Content, Tab, Tabs} from 'native-base'
+import {Container, View, Text, Content, Tab, Tabs, ScrollableTab} from 'native-base'
 
 import Header from '../component/Header'
 import {getFetch} from '../common/FetchUtils'
@@ -18,22 +18,25 @@ class ViewScreen extends Component {
     constructor(props){
         super(props);
         this.state = {
-            list: [],
+            list: {},
         }
+        this.activeItem = this.props.showItem.filter(item => item.checked)[0].name
     }
     loadList = async () => {
         try {
             const data = await getFetch(Urls.repositories, {
-                q: 'ALL',
+                q: this.activeItem,
                 sort: 'stars',
             });
+            const list = this.state.list;
+            list[this.activeItem] = data.items;
             this.setState({
-                list: data.items
+                list,
             })
         }catch (e) {
 
         }
-    }
+    };
     componentDidMount(){
         this.loadList();
     }
@@ -41,41 +44,54 @@ class ViewScreen extends Component {
         return (
             <FavoriteItem data={item}/>
         )
-    }
+    };
+    _onChangeTab = (item) => {
+        this.activeItem = item.ref.props.heading;
+        this.loadList();
+    };
     render() {
         return (
             <Container>
                 <Header
                     title={"Favorite"}
                 />
-                {/*<Tabs>*/}
-                    {/*<Tab heading="Tab1">*/}
-                    {/*</Tab>*/}
-                    {/*<Tab heading="Tab2">*/}
-                    {/*</Tab>*/}
-                    {/*<Tab heading="Tab3">*/}
-                    {/*</Tab>*/}
-                    {/*<Tab heading="Tab4">*/}
-                    {/*</Tab>*/}
-                    {/*<Tab heading="Tab5">*/}
-                    {/*</Tab>*/}
-                {/*</Tabs>*/}
-                <Content>
-                    <FlatList
-                        renderItem={this._renderItem}
-                        data={this.state.list}
-                        initialNumToRender={5}
-                        keyExtractor={item => item.id.toString()}
-                    />
-
-                </Content>
+                <Tabs
+                    renderTabBar={()=> <ScrollableTab />}
+                    tabBarUnderlineStyle={{backgroundColor: this.props.backgroundColor}}
+                    onChangeTab={this._onChangeTab}
+                >
+                    {
+                        this.props.showItem.map(item => {
+                            if(item.checked){
+                                return (
+                                    <Tab
+                                        heading={item.name}
+                                        key={item.name}
+                                        activeTextStyle={{color: this.props.backgroundColor}}
+                                    >
+                                        <Content>
+                                            <FlatList
+                                                renderItem={this._renderItem}
+                                                data={this.state.list[item.name] || []}
+                                                initialNumToRender={5}
+                                                keyExtractor={item => item.id.toString()}
+                                            />
+                                        </Content>
+                                    </Tab>
+                                )
+                            }
+                            return null;
+                        })
+                    }
+                </Tabs>
             </Container>
         );
     }
 }
 const mapStateToProps = state => {
     return {
-        backgroundColor: state.theme.color
+        backgroundColor: state.theme.color,
+        showItem: state.favorite.showItem,
     }
 };
 export default connect(mapStateToProps)(ViewScreen)

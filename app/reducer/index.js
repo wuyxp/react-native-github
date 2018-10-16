@@ -12,9 +12,14 @@ const theme = (state = {}, action) => {
             return {...action.theme}
     }
     return state;
-}
+};
+const favorite = (state = {}, action) => {
+
+    return state;
+};
 const initReducer = combineReducers({
     theme,
+    favorite,
 });
 
 export default initReducer;
