@@ -22,8 +22,8 @@ const BottomTab = createBottomTabNavigator({
     Trending: {screen: Trending},
     My: {screen: My},
 },{
-    // initialRouteName: 'Favorite',
-    initialRouteName: 'My',
+    initialRouteName: 'Favorite',
+    // initialRouteName: 'My',
     navigationOptions: ({navigation}) => ({
         tabBarIcon: ({focused, horizontal, tintColor}) => {
             const {routeName} = navigation.state;
