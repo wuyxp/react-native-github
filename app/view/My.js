@@ -5,7 +5,7 @@
  */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {View, Image, Animated, DeviceInfo, Dimensions ,findNodeHandle} from 'react-native'
+import {View, Image, Animated, DeviceInfo, Dimensions ,findNodeHandle, TouchableOpacity, Alert} from 'react-native'
 import _ from 'lodash'
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import { BlurView, VibrancyView } from 'react-native-blur';
@@ -46,7 +46,8 @@ class ViewScreen extends Component {
                     <ParallaxScrollView
                         style={{ flex: 1, backgroundColor: 'hotpink', overflow: 'hidden' }}
                         renderBackground={() =>
-                            <View>
+                            <View
+                            >
                                 <Image
                                     ref={(img) => { this.backgroundImage = img; }}
                                     source={Assets.via()}
@@ -57,26 +58,13 @@ class ViewScreen extends Component {
                                     style={{
                                         position: "absolute",
                                         top: 0, left: 0, bottom: 0, right: 0,
+                                        zIndex: 100,
                                     }}
                                     viewRef={this.state.viewRef}
                                     blurType="light"
                                     blurAmount={10}
                                 >
-                                    <View style={{
-                                        position: 'absolute',
-                                        bottom: 20,
-                                        width: 100,
-                                        height: 100,
-                                        left: (Dimensions.get('window').width - 100)/ 2,
-                                        borderRadius: 50,
-                                        borderColor: this.props.themeColor,
-                                        borderWidth: 2,
-                                        backgroundColor: '#ffffff',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}>
-                                        <Icon name={'md-person'} style={{color: this.props.themeColor, fontSize: 50}}/>
-                                    </View>
+
                                 </BlurView>
                             </View>
                         }
@@ -84,6 +72,26 @@ class ViewScreen extends Component {
                         parallaxHeaderHeight={ 350 }
                         backgroundSpeed={10}
                     >
+                        <TouchableOpacity
+                            onPress={() => {this.props.navigation.push('Login')}}
+                            style={{
+                                position: 'absolute',
+                                zIndex: 100,
+                                top: -120,
+                                width: 100,
+                                height: 100,
+                                left: (Dimensions.get('window').width - 100)/ 2,
+                                borderRadius: 50,
+                                borderColor: this.props.themeColor,
+                                borderWidth: 2,
+                                backgroundColor: '#ffffff',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Icon name={'md-person'} style={{color: this.props.themeColor, fontSize: 50}}/>
+                        </TouchableOpacity>
+
                         <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
                             <Left>
                                 <Button style={{ backgroundColor: this.props.themeColor }}>

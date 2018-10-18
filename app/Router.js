@@ -20,13 +20,16 @@ import ColorList from './view/settings/ColorList'
 
 const BottomTab = createBottomTabNavigator({
     Favorite: {screen: Favorite},
-    // Popular: {screen: Popular},
     Trending: {screen: Trending},
     My: {screen: My},
     Settings: {screen: Setting},
+
+
+
+    Login: {screen: Login},
 }, {
     // initialRouteName: 'Favorite',
-    initialRouteName: 'My',
+    initialRouteName: 'Login',
     navigationOptions: ({navigation}) => ({
         tabBarIcon: ({focused, horizontal, tintColor}) => {
             const {routeName} = navigation.state;
