@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from 'react';
+import {Root} from 'native-base'
 import { Provider } from 'react-redux'
 import store from './store'
 import Router from './Router'
@@ -14,7 +15,9 @@ export default class App extends Component<Props> {
     render() {
         return (
             <Provider store={store}>
-                <Router />
+                <Root>
+                    <Router />
+                </Root>
             </Provider>
         );
     }

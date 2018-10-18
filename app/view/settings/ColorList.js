@@ -9,7 +9,7 @@ import {Container, Content, View, Text, Button, Grid, Row, Col, CheckBox} from '
 import Header, {LeftReturn} from '../../component/Header'
 import {connect} from 'react-redux'
 
-import { changeTheme } from '../../action/changeTheme'
+import { changeTheme } from '../../action/theme/changeTheme'
 
 const COLORS = [
     // "33",

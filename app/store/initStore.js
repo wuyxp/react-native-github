@@ -8,6 +8,8 @@ export default initStore = {
     theme: {
         color: '#e91e63'
     },
+    userInfo: {
+    },
     favorite: {
         showItem: [
             {
