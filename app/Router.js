@@ -6,7 +6,7 @@
 import React from 'react'
 import {createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 import Icons from 'react-native-vector-icons/Ionicons'
-import store from './store'
+import store,{ persistor } from './store'
 import {connect} from 'react-redux'
 
 import Favorite from './view/Favorite'
@@ -48,7 +48,7 @@ const BottomTab = createBottomTabNavigator({
         tabBarOptions:{
             activeTintColor: store.getState()['theme']['color'],
                 // TODO 导航栏底部颜色没有跟随redux变量动态修改
-                // activeTintColor: this.props.theme.color,
+            // activeTintColor: "#333aaa",
             labelStyle :
             {
                 fontSize: 12,

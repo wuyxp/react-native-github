@@ -183,9 +183,11 @@ class ViewScreen extends Component {
     }
 }
 const mapStateToProps = state => {
+    console.log('1231212312321');
+    console.log(state);
     return {
         themeColor: _.get(state, 'theme.color', ''),
-        userInfo: state.userInfo
+        userInfo: _.get(state,'userInfo', {}),
     }
 }
 
