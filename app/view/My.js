@@ -46,21 +46,26 @@ class ViewScreen extends Component {
         const leftButtonStyle = { backgroundColor: this.props.themeColor, width: 25, height: 25 };
         const leftButtonIconStyle = {fontSize: 15};
         return (
-            <Container>
-                <Header
-                    title={"我的"}
-                />
-                <Content >
-                    {/* // TODO 无法实现下拉图片放大 */}
+            <View style={{flex: 1}}>
+
+                <View style={{flex: 1}}>
                     <ParallaxScrollView
-                        style={{ flex: 1, backgroundColor: 'hotpink', overflow: 'hidden' }}
+                        style={{ height: 200  }}
+                        renderStickyHeader={() =>
+                            <Header
+                                title={"我的"}
+                            />
+                        }
+                        stickyHeaderHeight={60}
                         renderBackground={() =>
                             <View
+                                style={{position: 'relative', zIndex:100}}
                             >
                                 <Image
                                     ref={(img) => { this.backgroundImage = img; }}
+
                                     source={this.props.userInfo.id ? {uri : this.props.userInfo.avatar_url} :Assets.via()}
-                                    style={{width: window.width, height: 350}}
+                                    style={{width: window.width, height: 300}}
                                     onLoadEnd={this.imageLoaded.bind(this)}
                                 />
                                 <BlurView
@@ -78,8 +83,14 @@ class ViewScreen extends Component {
                             </View>
                         }
                         // renderFixedHeader={() => <Text style={{ textAlign: 'right', color: 'white', padding: 5, fontSize: 20 }}>Hello</Text>}
-                        parallaxHeaderHeight={ 350 }
+                        parallaxHeaderHeight={ 300 }
                         backgroundSpeed={10}
+                        contentContainerStyle={{
+                            position: 'absolute',
+                            zIndex: 90,
+                            width: Dimensions.get('window').width,
+                            top: 300,
+                        }}
                     >
                         <TouchableOpacity
                             onPress={this.pressLogo}
@@ -105,86 +116,88 @@ class ViewScreen extends Component {
                                     <Icon name={'md-person'} style={{color: this.props.themeColor, fontSize: 50}}/>
                             }
                         </TouchableOpacity>
-
-                        <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
-                            <Left>
-                                <Button style={leftButtonStyle}>
-                                    <Icon active name="md-bookmarks" style={leftButtonIconStyle} />
-                                </Button>
-                            </Left>
-                            <Body>
+                        <View>
+                            <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
+                                <Left>
+                                    <Button style={leftButtonStyle}>
+                                        <Icon active name="md-bookmarks" style={leftButtonIconStyle} />
+                                    </Button>
+                                </Left>
+                                <Body>
                                 <Text>Repositories</Text>
-                            </Body>
-                            <Right>
-                                <Text>{this.props.userInfo.public_repos}</Text>
-                                <Icon active name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                        <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
-                            <Left>
-                                <Button style={leftButtonStyle}>
-                                    <Icon active name="md-git-commit" style={leftButtonIconStyle}  />
-                                </Button>
-                            </Left>
-                            <Body>
+                                </Body>
+                                <Right>
+                                    <Text>{this.props.userInfo.public_repos}</Text>
+                                    <Icon active name="arrow-forward" />
+                                </Right>
+                            </ListItem>
+                            <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
+                                <Left>
+                                    <Button style={leftButtonStyle}>
+                                        <Icon active name="md-git-commit" style={leftButtonIconStyle}  />
+                                    </Button>
+                                </Left>
+                                <Body>
                                 <Text>Issues</Text>
-                            </Body>
-                            <Right>
-                                <Text></Text>
-                                <Icon active name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                        <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
-                            <Left>
-                                <Button style={leftButtonStyle}>
-                                    <Icon active name="md-git-pull-request" style={leftButtonIconStyle}  />
-                                </Button>
-                            </Left>
-                            <Body>
+                                </Body>
+                                <Right>
+                                    <Text></Text>
+                                    <Icon active name="arrow-forward" />
+                                </Right>
+                            </ListItem>
+                            <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
+                                <Left>
+                                    <Button style={leftButtonStyle}>
+                                        <Icon active name="md-git-pull-request" style={leftButtonIconStyle}  />
+                                    </Button>
+                                </Left>
+                                <Body>
                                 <Text>Pull Requests</Text>
-                            </Body>
-                            <Right>
-                                <Text></Text>
-                                <Icon active name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                        <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
-                            <Left>
-                                <Button style={leftButtonStyle}>
-                                    <Icon active name="md-star" style={leftButtonIconStyle}  />
-                                </Button>
-                            </Left>
-                            <Body>
+                                </Body>
+                                <Right>
+                                    <Text></Text>
+                                    <Icon active name="arrow-forward" />
+                                </Right>
+                            </ListItem>
+                            <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
+                                <Left>
+                                    <Button style={leftButtonStyle}>
+                                        <Icon active name="md-star" style={leftButtonIconStyle}  />
+                                    </Button>
+                                </Left>
+                                <Body>
                                 <Text>stars</Text>
-                            </Body>
-                            <Right>
-                                <Text></Text>
-                                <Icon active name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                        <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
-                            <Left>
-                                <Button style={leftButtonStyle}>
-                                    <Icon active name="md-person-add" style={leftButtonIconStyle}  />
-                                </Button>
-                            </Left>
-                            <Body>
+                                </Body>
+                                <Right>
+                                    <Text></Text>
+                                    <Icon active name="arrow-forward" />
+                                </Right>
+                            </ListItem>
+                            <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
+                                <Left>
+                                    <Button style={leftButtonStyle}>
+                                        <Icon active name="md-person-add" style={leftButtonIconStyle}  />
+                                    </Button>
+                                </Left>
+                                <Body>
                                 <Text>Followers</Text>
-                            </Body>
-                            <Right>
-                                <Text>{this.props.userInfo.followers}</Text>
-                                <Icon active name="arrow-forward" />
-                            </Right>
-                        </ListItem>
+                                </Body>
+                                <Right>
+                                    <Text>{this.props.userInfo.followers}</Text>
+                                    <Icon active name="arrow-forward" />
+                                </Right>
+                            </ListItem>
+
+                        </View>
+
+
                     </ParallaxScrollView>
-                </Content>
-            </Container>
+                </View>
+            </View>
         );
     }
 }
 const mapStateToProps = state => {
-    console.log('1231212312321');
-    console.log(state);
     return {
         themeColor: _.get(state, 'theme.color', ''),
         userInfo: _.get(state,'userInfo', {}),

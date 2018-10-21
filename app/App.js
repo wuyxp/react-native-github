@@ -12,11 +12,19 @@ import Router from './Router'
 
 type Props = {};
 export default class App extends Component<Props> {
+    constructor(props){
+        super(props);
+
+
+    }
+    someEvent() {
+        this.navigator && this.navigator.dispatch({ type: 'Navigate', });
+    }
     render() {
         return (
             <Provider store={store}>
                 <Root>
-                    <Router />
+                    <Router ref={nav => { this.navigator = nav; }} />
                 </Root>
             </Provider>
         );

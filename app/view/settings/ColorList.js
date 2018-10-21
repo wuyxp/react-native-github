@@ -6,6 +6,7 @@
 import React, {Component} from 'react'
 import { FlatList } from 'react-native'
 import {Container, Content, View, Text, Button, Grid, Row, Col, CheckBox} from 'native-base'
+import {NavigationActions} from 'react-navigation'
 import Header, {LeftReturn} from '../../component/Header'
 import {connect} from 'react-redux'
 
@@ -42,6 +43,19 @@ class ColorList extends Component {
         }
     }
 
+    changeTheme = color => {
+
+        this.props.navigation.dispatch(NavigationActions.navigate({
+            routerName: "ColorList",
+            params: {
+                theme: color
+            }
+        }));
+        console.log('-----changeTheme-------');
+        console.log(this.props.navigation);
+        this.props.changeTheme(color);
+    }
+
     _renderItem = ({item}) => {
         return (
             <Row>
@@ -50,7 +64,7 @@ class ColorList extends Component {
                         <Col
                             key={index}
                             style={{backgroundColor:"#"+col, height:100, alignItems: 'center', justifyContent: 'center'}}
-                            onPress={() => this.props.changeTheme("#"+col)}
+                            onPress={() => this.changeTheme("#"+col)}
                         >
                             <View style={{backgroundColor:'#ffffff'}}>
                                 <Text>{col}</Text>
