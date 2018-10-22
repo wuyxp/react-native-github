@@ -6,5 +6,5 @@
 export const USER_INFO_LOGOUT = Symbol();
 
 export const logout = () => ({
-    type: USER_INFO_LOGIN,
+    type: USER_INFO_LOGOUT,
 })

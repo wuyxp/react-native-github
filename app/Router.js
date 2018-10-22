@@ -30,8 +30,7 @@ const BottomTab = createBottomTabNavigator({
     // Login: {screen: Login},
 }, {
     // initialRouteName: 'Favorite',
-    routeName:'bottomTab',
-    initialRouteName: 'My',
+    initialRouteName: 'Settings',
     navigationOptions: ({navigation}) => ({
         tabBarIcon: ({focused, horizontal, tintColor}) => {
             console.log(navigation);

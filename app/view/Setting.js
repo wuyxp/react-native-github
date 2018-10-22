@@ -5,11 +5,38 @@
  */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {View} from 'react-native'
+import {StackActions, NavigationActions} from 'react-navigation'
 import _ from 'lodash'
 import {Container, Content, ListItem, Left, Right, Body, Button, Icon, Text} from 'native-base'
 import Header from '../component/Header'
 
+import {logout} from '../action/userInfo/logout'
+
 class ViewScreen extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isLoading: false,
+        }
+    }
+
+    logoutGithub = () => {
+        this.setState({
+            isLoading: true,
+        })
+        this.props.logout();
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({routeName: 'BottomTab'})]
+        })
+        this.props.navigation.dispatch(resetAction);
+        this.setState({
+            isLoading: false,
+        })
+        _
+    }
+
     render() {
         return (
             <Container>
@@ -17,10 +44,12 @@ class ViewScreen extends Component {
                     title={"设置"}
                 />
                 <Content>
-                    <ListItem icon onPress={() => {this.props.navigation.push("ColorList")}}>
+                    <ListItem icon onPress={() => {
+                        this.props.navigation.push("ColorList")
+                    }}>
                         <Left>
-                            <Button style={{ backgroundColor: this.props.themeColor }}>
-                                <Icon active name="film" />
+                            <Button style={{backgroundColor: this.props.themeColor}}>
+                                <Icon active name="film"/>
                             </Button>
                         </Left>
                         <Body>
@@ -28,19 +57,38 @@ class ViewScreen extends Component {
                         </Body>
                         <Right>
                             <Text>{this.props.themeColor}</Text>
-                            <Icon active name="arrow-forward" />
+                            <Icon active name="arrow-forward"/>
                         </Right>
                     </ListItem>
+                    <View style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 50,
+                    }}>
+                        <View>
+                            <Button disabled={this.state.isLoading} block rounded bordered
+                                    style={{borderColor: this.props.themeColor, width: 300}}
+                                    onPress={this.logoutGithub}>
+                                <Text style={{color: this.props.themeColor}}>LOGOUT</Text>
+                            </Button>
+                        </View>
+                    </View>
                 </Content>
             </Container>
         );
     }
 }
+
 const mapStateToProps = state => {
     return {
         themeColor: _.get(state, 'theme.color', '')
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
 
 
-export default connect(mapStateToProps)(ViewScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewScreen)
