@@ -8,7 +8,8 @@ import {Container, View, Text, Title, Subtitle, Tabs, ScrollableTab, Tab, Conten
 import {connect} from 'react-redux'
 import Header from '../component/Header'
 import {FlatList, RefreshControl} from "react-native";
-import trending from "../reducer/trending";
+
+// import { fetchRepositories } from '@huchenme/github-trending';
 
 class ViewScreen extends Component {
     constructor(props){
@@ -23,7 +24,13 @@ class ViewScreen extends Component {
         }
     }
     loadList = () => {
-
+        const {since, language} = this.state;
+        // fetchRepositories({
+        //     language,
+        //     since,
+        // }).then(repo => {
+        //     console.log(repo);
+        // })
     }
     _onChangeTab = (item) => {
         this.activeItem = item.ref.props.heading;
