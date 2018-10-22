@@ -14,9 +14,13 @@ import initStore from './initStore'
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: [
+        'theme',
+        'userInfo'
+    ],
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const createStoreWithMiddleware = compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),

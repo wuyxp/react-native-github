@@ -22,14 +22,21 @@ class HeaderComponent extends Component{
                     }
                 </Left>
                 <Body>
-                    <Title style={{color: "#ffffff"}}>{this.props.title}</Title>
+                {
+                    typeof this.props.title === 'string' ?
+                        <Title style={{color: "#ffffff"}}>{this.props.title}</Title> :
+                        this.props.title(this.props.backgroundColor)
+                }
                 </Body>
                 <Right></Right>
             </Header>
         );
     }
     static PropsType = {
-        title: PropsType.string,
+        title: PropsType.oneOfType(
+            PropsType.string,
+            PropsType.func
+        ),
         leftComponent: PropsType.element
     }
     static defaultProps = {

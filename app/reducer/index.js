@@ -7,11 +7,13 @@ import {combineReducers} from 'redux'
 import theme from './theme'
 import favorite from './favorite'
 import userInfo from './userInfo'
+import trending from './trending'
 
 const initReducer = combineReducers({
     theme,
     favorite,
     userInfo,
+    trending
 });
 
 export default initReducer;

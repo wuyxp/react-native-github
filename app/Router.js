@@ -30,7 +30,7 @@ const BottomTab = createBottomTabNavigator({
     // Login: {screen: Login},
 }, {
     // initialRouteName: 'Favorite',
-    initialRouteName: 'Settings',
+    initialRouteName: 'Trending',
     navigationOptions: ({navigation}) => ({
         tabBarIcon: ({focused, horizontal, tintColor}) => {
             console.log(navigation);
@@ -39,7 +39,7 @@ const BottomTab = createBottomTabNavigator({
             if (routeName === 'Favorite') {
                 iconName = 'ios-keypad'
             } else if (routeName === 'Trending') {
-                iconName = 'ios-heart'
+                iconName = 'md-stats'
             } else if (routeName === 'My') {
                 iconName = 'ios-person'
             } else if (routeName === 'Settings') {
