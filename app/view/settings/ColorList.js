@@ -7,6 +7,7 @@ import React, {Component} from 'react'
 import { FlatList } from 'react-native'
 import {Container, Content, View, Text, Button, Grid, Row, Col, CheckBox} from 'native-base'
 import {NavigationActions} from 'react-navigation'
+import BaseComponent from '../../component/BaseComponent'
 import Header, {LeftReturn} from '../../component/Header'
 import {connect} from 'react-redux'
 
@@ -35,7 +36,7 @@ const generatorColors = (Colors, length) => {
     return result;
 }
 
-class ColorList extends Component {
+class ColorList extends BaseComponent {
     constructor(props){
         super(props);
         this.state = {

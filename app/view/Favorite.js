@@ -4,9 +4,10 @@
  * @time: 2018/10/12 下午2:56
  */
 import React, {Component} from 'react'
-import { FlatList, RefreshControl } from 'react-native'
+import { FlatList, RefreshControl, TouchableOpacity } from 'react-native'
 import {connect} from 'react-redux'
 import {Container, View, Text, Content, Tab, Tabs, ScrollableTab, Spinner, ListItem} from 'native-base'
+import BaseComponent from '../component/BaseComponent'
 
 import Header from '../component/Header'
 import {getFetch} from '../common/FetchUtils'
@@ -14,7 +15,7 @@ import Urls from '../common/Urls'
 
 import FavoriteItem from '../component/FavoriteItem'
 
-class ViewScreen extends Component {
+class ViewScreen extends BaseComponent {
     constructor(props){
         super(props);
         this.state = {
@@ -48,7 +49,9 @@ class ViewScreen extends Component {
     }
     _renderItem = ({item}) => {
         return (
-            <FavoriteItem data={item}/>
+            <TouchableOpacity onPress={() => this.toReposDetail(item)}>
+                <FavoriteItem data={item}/>
+            </TouchableOpacity>
         )
     };
     _onChangeTab = (item) => {

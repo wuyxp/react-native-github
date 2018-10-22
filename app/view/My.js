@@ -7,6 +7,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {View, Image, Animated, DeviceInfo, Dimensions ,findNodeHandle, TouchableOpacity, Alert} from 'react-native'
 import _ from 'lodash'
+import BaseComponent from '../component/BaseComponent'
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import { BlurView, VibrancyView } from 'react-native-blur';
 import {
@@ -27,7 +28,7 @@ import {
 import Header from '../component/Header'
 import Assets from '../assets'
 
-class ViewScreen extends Component {
+class ViewScreen extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = { viewRef: null };

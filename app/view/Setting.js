@@ -8,12 +8,13 @@ import {connect} from 'react-redux'
 import {View} from 'react-native'
 import {StackActions, NavigationActions} from 'react-navigation'
 import _ from 'lodash'
+import BaseComponent from '../component/BaseComponent'
 import {Container, Content, ListItem, Left, Right, Body, Button, Icon, Text} from 'native-base'
 import Header from '../component/Header'
 
 import {logout} from '../action/userInfo/logout'
 
-class ViewScreen extends Component {
+class ViewScreen extends BaseComponent {
     constructor(props) {
         super(props)
         this.state = {

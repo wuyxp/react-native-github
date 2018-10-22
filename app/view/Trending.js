@@ -6,12 +6,13 @@
 import React, {Component} from 'react'
 import {Container, View, Text, Title, Subtitle, Tabs, ScrollableTab, Tab, Content, Spinner} from 'native-base'
 import {connect} from 'react-redux'
+import BaseComponent from '../component/BaseComponent'
 import Header from '../component/Header'
 import {FlatList, RefreshControl} from "react-native";
 
 // import { fetchRepositories } from '@huchenme/github-trending';
 
-class ViewScreen extends Component {
+class ViewScreen extends BaseComponent {
     constructor(props){
         super(props);
         this.state={

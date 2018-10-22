@@ -15,9 +15,15 @@ import Popular from './view/Popular'
 import Trending from './view/Trending'
 import My from './view/My'
 import Setting from './view/Setting'
+
+// 账号相关
 import Login from './view/my/Login'
 
+// 设置系列
 import ColorList from './view/settings/ColorList'
+
+// 项目系列
+import ReposDetail from './view/repos/Detail'
 
 const BottomTab = createBottomTabNavigator({
     Favorite: {screen: Favorite},
@@ -25,12 +31,10 @@ const BottomTab = createBottomTabNavigator({
     My: {screen: My},
     Settings: {screen: Setting},
 
-
-
     // Login: {screen: Login},
 }, {
-    // initialRouteName: 'Favorite',
-    initialRouteName: 'Trending',
+    initialRouteName: 'Favorite',
+    // initialRouteName: 'Trending',
     navigationOptions: ({navigation}) => ({
         tabBarIcon: ({focused, horizontal, tintColor}) => {
             console.log(navigation);
@@ -76,6 +80,7 @@ const StackNavigator = createStackNavigator({
     BottomTab: {
         screen: BottomTab,
     },
+    reposDetail: {screen: ReposDetail},
     ColorList: {screen: ColorList},
     Login: {screen: Login},
 }, {
