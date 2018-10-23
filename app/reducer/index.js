@@ -8,12 +8,14 @@ import theme from './theme'
 import favorite from './favorite'
 import userInfo from './userInfo'
 import trending from './trending'
+import account from './account'
 
 const initReducer = combineReducers({
     theme,
     favorite,
     userInfo,
-    trending
+    trending,
+    account,
 });
 
 export default initReducer;

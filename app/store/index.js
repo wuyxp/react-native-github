@@ -16,7 +16,8 @@ const persistConfig = {
     storage,
     whitelist: [
         'theme',
-        'userInfo'
+        'userInfo',
+        'account',
     ],
 }
 

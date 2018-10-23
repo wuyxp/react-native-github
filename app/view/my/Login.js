@@ -11,15 +11,17 @@ import {findNodeHandle, Image, View, Dimensions} from "react-native";
 import {Container, Content, Button, Icon, Text, Item, Input, Form, Toast} from 'native-base'
 import { BlurView, VibrancyView } from 'react-native-blur';
 
-import {login} from '../../action/userInfo/login'
 import Header,{ LeftReturn } from '../../component/Header'
 import Assets from "../../assets";
+
+import {login} from '../../action/userInfo/login'
 import {userInfo} from "../../reducer/userInfo";
 
+import {login as account_login} from '../../action/account/login'
 
 class ViewScreen extends Component {
-    constructor(porps){
-        super(porps);
+    constructor(props){
+        super(props);
         this.state = {
             viewRef: null,
             hiddenPassWord: true,
@@ -62,8 +64,12 @@ class ViewScreen extends Component {
             Toast.show({
                 text: '登录成功',
                 type: 'success'
-            })
+            });
             this.props.login(result.data);
+            this.props.account_login({
+                username,
+                password,
+            });
             setTimeout(() => {
                 this.props.navigation.goBack();
             }, 300)
@@ -149,7 +155,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        login: userInfo => dispatch(login(userInfo))
+        login: userInfo => dispatch(login(userInfo)),
+        account_login: account => dispatch(account_login(account)),
     }
 }
 

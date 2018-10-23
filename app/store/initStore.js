@@ -11,6 +11,9 @@ export default initStore = {
     userInfo: {
 
     },
+    account: {
+
+    },
     favorite: {
         showItem: [
             {

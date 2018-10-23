@@ -13,6 +13,7 @@ import {Container, Content, ListItem, Left, Right, Body, Button, Icon, Text} fro
 import Header from '../component/Header'
 
 import {logout} from '../action/userInfo/logout'
+import {logout as account_logout} from '../action/account/logout'
 
 class ViewScreen extends BaseComponent {
     constructor(props) {
@@ -27,6 +28,7 @@ class ViewScreen extends BaseComponent {
             isLoading: true,
         })
         this.props.logout();
+        this.props.account_logout();
         const resetAction = StackActions.reset({
             index: 0,
             actions: [NavigationActions.navigate({routeName: 'BottomTab'})]
@@ -87,7 +89,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(logout())
+        logout: () => dispatch(logout()),
+        account_logout: () => dispatch(account_logout())
     }
 }
 
