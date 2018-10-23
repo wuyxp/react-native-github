@@ -3,7 +3,7 @@
  * @author: 武扬/956826374@qq.com
  * @time: 2018/10/17 上午11:31
  */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import _ from 'lodash'
 import GitHub from  'github-api'
@@ -12,6 +12,7 @@ import {Container, Content, Button, Icon, Text, Item, Input, Form, Toast} from '
 import { BlurView, VibrancyView } from 'react-native-blur';
 
 import Header,{ LeftReturn } from '../../component/Header'
+import BaseComponent from '../../component/BaseComponent'
 import Assets from "../../assets";
 
 import {login} from '../../action/userInfo/login'
@@ -19,7 +20,7 @@ import {userInfo} from "../../reducer/userInfo";
 
 import {login as account_login} from '../../action/account/login'
 
-class ViewScreen extends Component {
+class ViewScreen extends BaseComponent {
     constructor(props){
         super(props);
         this.state = {
@@ -65,6 +66,8 @@ class ViewScreen extends Component {
                 text: '登录成功',
                 type: 'success'
             });
+            super.github = this.gethub;
+
             this.props.login(result.data);
             this.props.account_login({
                 username,

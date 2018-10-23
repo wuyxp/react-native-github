@@ -4,11 +4,11 @@
  * @time: 2018/10/15 上午10:44
  */
 import {createStore, applyMiddleware, compose} from 'redux'
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistStore, persistReducer, getStoredState } from 'redux-persist'
 import storage from '../storage'
 
 import rootReducer from '../reducer'
-import initStore from './initStore'
+import initStoreData from './initStore'
 
 
 const persistConfig = {
@@ -27,7 +27,8 @@ const createStoreWithMiddleware = compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )(createStore);
 
-const store = createStoreWithMiddleware(persistedReducer, initStore);
+const store = createStoreWithMiddleware(persistedReducer, initStoreData);
 
 export const persistor = persistStore(store);
-export default store
+export default store;
+export const initStore = getStoredState(persistConfig);

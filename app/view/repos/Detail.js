@@ -18,19 +18,19 @@ import ListIconItem from '../../component/ListIconItem'
 import ThemeIconButton from '../../component/ThemeIconButton'
 import { isLogin } from '../../common/Utils'
 
-import {getFetch, putFetch, deleteFetch} from '../../common/FetchUtils'
-import Urls from '../../common/Urls'
-
 class ViewScreen extends BaseComponent {
     constructor(props) {
         super(props);
-        this.state = { };
+        this.state = {
+            isStarred: false,
+        };
         const {navigation} = this.props;
         this.repoData = navigation.getParam('repoData');
         console.log(this.repoData);
     }
 
-    componentDidMount(){
+    async componentDidMount(){
+        await super.componentDidMount();
         if(isLogin(this.props.userInfo)){
             this.loadStar();
             this.loadFork();
@@ -39,7 +39,20 @@ class ViewScreen extends BaseComponent {
 
     staring = () => {
         if(isLogin(this.props.userInfo)){
-
+            const {isStarred} = this.state;
+            if(!isStarred){
+                this.github.getRepo(this.repoData.full_name).star().then(isStarred => {
+                    this.setState(() => ({
+                        isStarred: true
+                    }))
+                })
+            }else{
+                this.github.getRepo(this.repoData.full_name).unstar().then(isStarred => {
+                    this.setState(() => ({
+                        isStarred: false
+                    }))
+                })
+            }
         }else{
             this.props.navigation.push("Login")
         }
@@ -49,9 +62,10 @@ class ViewScreen extends BaseComponent {
     };
 
     loadStar = () => {
-        getFetch(`${Urls.starred}${this.props.userInfo.login}/${this.repoData.name}`).then(res => {
-            console.log('----------');
-            console.log(res);
+        this.github.getRepo(this.repoData.full_name).isStarred().then(isStarred => {
+            this.setState({
+                isStarred
+            })
         })
     };
     loadFork = () => {
@@ -88,8 +102,8 @@ class ViewScreen extends BaseComponent {
                                 <View style={{marginBottom: 10,  flexDirection: 'row', justifyContent:'space-around'}}>
                                     <ThemeIconButton
                                         icon='md-star'
-                                        text={'star:'+this.repoData.stargazers_count}
-                                        bordered={true}
+                                        text={'star:'+((+this.repoData.stargazers_count)+(+this.state.isStarred))}
+                                        bordered={!this.state.isStarred}
                                         onPress={this.staring}
                                     />
                                     <ThemeIconButton
