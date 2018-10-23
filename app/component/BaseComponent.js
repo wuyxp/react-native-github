@@ -22,7 +22,17 @@ export default class BaseComponent extends Component {
         this.github = new GitHub({
             username,
             password
-        })
+        });
+        // since we're unauthenticated the limit is 60 requests per hour
+        this.github.getRateLimit().getRateLimit()
+            .then(function(resp) {
+                console.log('Limit remaining: ' + resp.data.rate.remaining);
+                // date constructor takes epoch milliseconds and we get epoch seconds
+                console.log('Reset date: ' + new Date(resp.data.rate.reset * 1000));
+            }).catch(function(error) {
+            console.log('Error fetching rate limit', error.message);
+        });
+
     }
 
     toReposDetail = repoData => {

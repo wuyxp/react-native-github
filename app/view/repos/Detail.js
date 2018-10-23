@@ -58,7 +58,24 @@ class ViewScreen extends BaseComponent {
         }
     };
     forking = () => {
-
+        if(isLogin(this.props.userInfo)){
+            const {isStarred} = this.state;
+            if(!isStarred){
+                this.github.getRepo(this.repoData.full_name).star().then(isStarred => {
+                    this.setState(() => ({
+                        isStarred: true
+                    }))
+                })
+            }else{
+                this.github.getRepo(this.repoData.full_name).unstar().then(isStarred => {
+                    this.setState(() => ({
+                        isStarred: false
+                    }))
+                })
+            }
+        }else{
+            this.props.navigation.push("Login")
+        }
     };
 
     loadStar = () => {

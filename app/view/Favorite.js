@@ -34,6 +34,20 @@ class ViewScreen extends BaseComponent {
                 sort: 'stars',
                 per_page: 10,
             });
+            // //
+            // console.log('abcabcabc');
+            //
+            // const searchData = await this.github.search().forRepositories({
+            //     q: this.activeItem,
+            //     sort: 'stars',
+            //     per_page: 10,
+            // });
+            // console.log('1111111111');
+            // console.log(data);
+            //
+            // console.log('22222222222222');
+            // console.log(searchData);
+
             const list = this.state.list;
             list[this.activeItem] = data.items;
             this.setState({
@@ -44,7 +58,8 @@ class ViewScreen extends BaseComponent {
 
         }
     };
-    componentDidMount(){
+    async componentDidMount(){
+        await super.componentDidMount();
         this.loadList();
     }
     _renderItem = ({item}) => {
