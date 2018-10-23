@@ -15,7 +15,11 @@ import Header, {LeftReturn} from '../../component/Header'
 import Avatar from '../../component/Avatar'
 import RenderBackground from '../../component/ParallaxScrollViewRenderBackground'
 import ListIconItem from '../../component/ListIconItem'
+import ThemeIconButton from '../../component/ThemeIconButton'
+import { isLogin } from '../../common/Utils'
 
+import {getFetch, putFetch, deleteFetch} from '../../common/FetchUtils'
+import Urls from '../../common/Urls'
 
 class ViewScreen extends BaseComponent {
     constructor(props) {
@@ -25,6 +29,34 @@ class ViewScreen extends BaseComponent {
         this.repoData = navigation.getParam('repoData');
         console.log(this.repoData);
     }
+
+    componentDidMount(){
+        if(isLogin(this.props.userInfo)){
+            this.loadStar();
+            this.loadFork();
+        }
+    }
+
+    staring = () => {
+        if(isLogin(this.props.userInfo)){
+
+        }else{
+            this.props.navigation.push("Login")
+        }
+    };
+    forking = () => {
+
+    };
+
+    loadStar = () => {
+        getFetch(`${Urls.starred}${this.props.userInfo.login}/${this.repoData.name}`).then(res => {
+            console.log('----------');
+            console.log(res);
+        })
+    };
+    loadFork = () => {
+
+    };
 
     render() {
         return (
@@ -47,14 +79,30 @@ class ViewScreen extends BaseComponent {
                     backgroundSpeed={10}
                 >
                     <View style={{position:'absolute', top: -300, width: Dimensions.get('window').width}}>
-                        <View style={{marginTop: 50,}}>
+                        <View style={{marginTop: 25,}}>
                             <Icon name='ios-arrow-back' active style={{color: '#fff', marginLeft: 10}} onPress={() => this.props.navigation.pop()}/>
                         </View>
-                        <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 20}}>
+                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
                             <Avatar avatar_url={this.repoData.owner.avatar_url}/>
-                        </View>
-                        <View>
-
+                            <View style={{paddingLeft: 20, paddingRight: 20, marginTop:10,}}>
+                                <View style={{marginBottom: 10,  flexDirection: 'row', justifyContent:'space-around'}}>
+                                    <ThemeIconButton
+                                        icon='md-star'
+                                        text={'star:'+this.repoData.stargazers_count}
+                                        bordered={true}
+                                        onPress={this.staring}
+                                    />
+                                    <ThemeIconButton
+                                        icon='md-git-network'
+                                        text={'fork:'+this.repoData.forks_count}
+                                        bordered={true}
+                                        onPress={this.forking}
+                                    />
+                                </View>
+                                <Text style={{color: '#ffffff'}}>
+                                    {this.repoData.description}
+                                </Text>
+                            </View>
                         </View>
                     </View>
 
@@ -101,6 +149,7 @@ class ViewScreen extends BaseComponent {
 const mapStateToProps = state => {
     return {
         themeColor: state.theme.color,
+        userInfo: state.userInfo,
     }
 };
 const mapDispatchToProps = dispatch => {

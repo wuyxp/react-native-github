@@ -5,7 +5,8 @@
  */
 
 import Urls from './Urls'
-import Utils from './Utils'
+import {stringifyParams} from './Utils'
+
 export const Fetch = (url, method, params) => {
     const header = new Headers({
         Accept: 'application/vnd.github.v3+json',
@@ -16,13 +17,13 @@ export const Fetch = (url, method, params) => {
         header,
     };
     let toUrl = Urls.host + url;
-    if(method === 'get'){
-        const strParams = Utils.stringifyParams(params);
-        if(strParams){
+    if (method === 'get') {
+        const strParams = stringifyParams(params);
+        if (strParams) {
             toUrl += '?' + strParams;
         }
         delete options.body
-    }else{
+    } else {
         options.body = params;
     }
     console.log("请求发起：-----------");
@@ -44,4 +45,12 @@ export const postFetch = (url, params = {}) => {
 export const getFetch = (url, params = {}) => {
 
     return Fetch(url, 'get', params)
+}
+export const putFetch = (url, params = {}) => {
+
+    return Fetch(url, 'put', params)
+}
+export const deleteFetch = (url, params = {}) => {
+
+    return Fetch(url, 'delete', params)
 }
