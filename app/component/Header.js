@@ -33,10 +33,10 @@ class HeaderComponent extends Component{
         );
     }
     static PropsType = {
-        title: PropsType.oneOfType(
+        title: PropsType.oneOfType([
             PropsType.string,
             PropsType.func
-        ),
+        ]),
         leftComponent: PropsType.element
     }
     static defaultProps = {

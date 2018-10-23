@@ -5,9 +5,19 @@
  */
 
 import React, {Component} from 'react'
+import {StackActions} from 'react-navigation'
 
 export default class BaseComponent extends Component {
-    toReposDetail = (item) => {
-        this.props.navigation.push('reposDetail')
+    constructor(props){
+        super(props);
+    }
+    toReposDetail = repoData => {
+        const pushAction = StackActions.push({
+            routeName: 'reposDetail',
+            params: {
+                repoData
+            }
+        });
+        this.props.navigation.dispatch(pushAction);
     };
 }
