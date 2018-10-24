@@ -137,15 +137,14 @@ class ViewScreen extends BaseComponent {
                         </View>
                     </View>
 
-                    <View>
                         <ListIconItem
                             onPress={() => {}}
-                            icon="md-bookmarks"
-                            text="Repositories"
+                            icon="md-code"
+                            text="code"
                         />
 
                         <ListIconItem
-                            onPress={() => {}}
+                            onPress={() => {this.toReposIssues(this.repoData)}}
                             icon="md-git-commit"
                             text="Issues"
                         />
@@ -168,7 +167,6 @@ class ViewScreen extends BaseComponent {
                             text="Followers"
                         />
 
-                    </View>
 
 
                 </ParallaxScrollView>

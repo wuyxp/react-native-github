@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Body, Button, Icon, Left, ListItem, Right, Text} from "native-base";
 
-class Avatar extends Component{
+class ListIconItem extends Component{
     render() {
         const leftButtonStyle = {backgroundColor: this.props.themeColor, width: 25, height: 25};
         const leftButtonIconStyle = {fontSize: 15};
@@ -20,7 +20,7 @@ class Avatar extends Component{
                     </Button>
                 </Left>
                 <Body>
-                <Text>{this.props.text}</Text>
+                    <Text>{this.props.text}</Text>
                 </Body>
                 <Right>
                     <Text>{this.props.tipText}</Text>
@@ -49,4 +49,4 @@ const mapStateToProps = state => {
         themeColor: state.theme.color,
     }
 };
-export default connect(mapStateToProps)(Avatar);
+export default connect(mapStateToProps)(ListIconItem);

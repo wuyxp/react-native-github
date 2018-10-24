@@ -35,13 +35,20 @@ export default class BaseComponent extends Component {
 
     }
 
-    toReposDetail = repoData => {
-        const pushAction = StackActions.push({
-            routeName: 'reposDetail',
+    getReposAction = (routeName, repoData) => {
+        return StackActions.push({
+            routeName,
             params: {
                 repoData
             }
         });
-        this.props.navigation.dispatch(pushAction);
+    }
+
+    toReposDetail = repoData => {
+        this.props.navigation.dispatch(this.getReposAction('reposDetail', repoData));
     };
+
+    toReposIssues = repoData => {
+        this.props.navigation.dispatch(this.getReposAction('reposIssues', repoData));
+    }
 }
