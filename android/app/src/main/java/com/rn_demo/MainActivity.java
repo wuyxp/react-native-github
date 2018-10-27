@@ -16,13 +16,5 @@ public class MainActivity extends ReactActivity {
         return "rn_demo";
     }
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-      // Show the js-controlled splash screen
-      SplashScreen.show(this, getReactInstanceManager());  //**********需要添加的************
-
-      super.onCreate(savedInstanceState);
-
-  }
 
 }

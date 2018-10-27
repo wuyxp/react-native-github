@@ -23,11 +23,12 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const createStoreWithMiddleware = compose(
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-)(createStore);
-
-const store = createStoreWithMiddleware(persistedReducer, initStoreData);
+// const createStoreWithMiddleware = compose(
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+// )(createStore);
+//
+// const store = createStoreWithMiddleware(persistedReducer, initStoreData);
+const store = createStore(persistedReducer, initStoreData, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export const persistor = persistStore(store);
 export default store;

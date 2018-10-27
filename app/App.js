@@ -9,6 +9,7 @@ import {Root} from 'native-base'
 import { Provider } from 'react-redux'
 import store from './store'
 import Router from './Router'
+import SplashScreen from "rn-splash-screen";
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -16,6 +17,9 @@ export default class App extends Component<Props> {
         super(props);
 
 
+    }
+    componentDidMount(){
+        SplashScreen.hide();
     }
     someEvent() {
         this.navigator && this.navigator.dispatch({ type: 'Navigate', });
