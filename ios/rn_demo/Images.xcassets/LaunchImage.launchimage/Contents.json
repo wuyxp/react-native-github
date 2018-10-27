@@ -33,11 +33,12 @@
       "scale" : "2x"
     },
     {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
       "extent" : "full-screen",
-      "minimum-system-version" : "11.0",
+      "idiom" : "iphone",
       "subtype" : "2436h",
+      "filename" : "splashiPhoneXPortraitiOS11_375x812pt@3x.png",
+      "minimum-system-version" : "11.0",
+      "orientation" : "portrait",
       "scale" : "3x"
     },
     {
@@ -49,11 +50,12 @@
       "scale" : "3x"
     },
     {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
       "extent" : "full-screen",
-      "minimum-system-version" : "8.0",
+      "idiom" : "iphone",
       "subtype" : "736h",
+      "filename" : "splashiPhonePortraitiOS89_414x736pt@3x.png",
+      "minimum-system-version" : "8.0",
+      "orientation" : "portrait",
       "scale" : "3x"
     },
     {
@@ -65,17 +67,18 @@
       "scale" : "3x"
     },
     {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
       "extent" : "full-screen",
-      "minimum-system-version" : "8.0",
+      "idiom" : "iphone",
       "subtype" : "667h",
+      "filename" : "splashiPhonePortraitiOS89_375x667pt@2x.png",
+      "minimum-system-version" : "8.0",
+      "orientation" : "portrait",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "splash.png",
+      "filename" : "splashiPhonePortraitiOS789_320x480pt@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -84,7 +87,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "splash-4.png",
+      "filename" : "splashiPhonePortraitiOS789_320x568pt@2x.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -92,21 +95,21 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "splash-3.png",
+      "filename" : "splashiPhonePortraitiOS56_320x480pt.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "splash-2.png",
+      "filename" : "splashiPhonePortraitiOS56_320x480pt@2x.png",
       "extent" : "full-screen",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "splash-1.png",
+      "filename" : "splashiPhonePortraitiOS56_320x568pt@2x.png",
       "extent" : "full-screen",
       "subtype" : "retina4",
       "scale" : "2x"

@@ -74,23 +74,16 @@ class ViewScreen extends BaseComponent {
                                 style={{width: window.width, height: 300}}
                                 onLoadEnd={this.imageLoaded.bind(this)}
                             />
-                            <View>
-                                <Text>
-                                {
-                                    this.state.viewRef &&
-                                    <BlurView
-                                        style={{
-                                            position: "absolute",
-                                            top: 0, left: 0, bottom: 0, right: 0,
-                                            zIndex: 100,
-                                        }}
-                                        viewRef={this.state.viewRef}
-                                        blurType="light"
-                                        blurAmount={10}
-                                    />
-                                }
-                                </Text>
-                            </View>
+                            <BlurView
+                                style={{
+                                    position: "absolute",
+                                    top: 0, left: 0, bottom: 0, right: 0,
+                                    zIndex: 100,
+                                }}
+                                viewRef={this.state.viewRef}
+                                blurType="light"
+                                blurAmount={10}
+                            />
                         </View>
                     }
                     // renderFixedHeader={() => <View style={{position: 'relative', zIndex: 101}}><Text style={{ textAlign: 'right', color: 'white', padding: 5, fontSize: 20 }}>Hello</Text></View>}
