@@ -10,12 +10,21 @@ import {connect} from 'react-redux'
 import Header,{ LeftReturn } from '../../component/Header'
 
 import BaseComponent from '../../component/BaseComponent'
+import ThemeSegment from '../../component/ThemeSegment'
 import { isLogin } from '../../common/Utils'
 
 class ViewScreen extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
+            tabData: [
+                {
+                    text: 'Open',
+                    active: true,
+                },{
+                    text: 'Closed',
+                }
+            ]
         };
         const {navigation} = this.props;
         this.repoData = navigation.getParam('repoData');
@@ -28,6 +37,11 @@ class ViewScreen extends BaseComponent {
 
         }
     }
+    changeTab = text => {
+        this.setState({
+            tabData: this.state.tabData.map(tab => ({...tab, active: tab.text === text}))
+        })
+    }
     render() {
         return (
             <Container>
@@ -35,14 +49,10 @@ class ViewScreen extends BaseComponent {
                     title={this.repoData.name}
                     leftComponent={<LeftReturn/>}
                 />
-                <Segment>
-                    <Button first active={true}>
-                        <Text>Open</Text>
-                    </Button>
-                    <Button last>
-                        <Text>Closed</Text>
-                    </Button>
-                </Segment>
+                <ThemeSegment
+                    buttons={this.state.tabData}
+                    onChangeTab={tab => this.changeTab(tab)}
+                />
             </Container>
         )
     }
