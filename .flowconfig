@@ -19,6 +19,8 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+# .*/node_modules/react-native/Libraries/.*
+
 [include]
 
 [libs]
@@ -29,8 +31,8 @@ node_modules/react-native/flow-github/
 [options]
 emoji=true
 
-esproposal.optional_chaining=enable
-esproposal.nullish_coalescing=enable
+# esproposal.optional_chaining=enable
+# esproposal.nullish_coalescing=enable
 
 module.system=haste
 module.system.haste.use_name_reducers=true
@@ -67,4 +69,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-^0.78.0
+^0.65.0

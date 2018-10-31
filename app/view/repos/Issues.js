@@ -2,11 +2,12 @@
  * Created with comment
  * @author: 武扬/956826374@qq.com
  * @time: 2018/10/24 上午10:47
+ * @flow
  */
 import React, {Component} from 'react'
 import {Container, View, Text, Segment, Button} from 'native-base'
 import {connect} from 'react-redux'
-import Header from '../../component/Header'
+import Header,{ LeftReturn } from '../../component/Header'
 
 import BaseComponent from '../../component/BaseComponent'
 import { isLogin } from '../../common/Utils'
@@ -32,6 +33,7 @@ class ViewScreen extends BaseComponent {
             <Container>
                 <Header
                     title={this.repoData.name}
+                    leftComponent={<LeftReturn/>}
                 />
                 <Segment>
                     <Button first active={true}>

@@ -2,9 +2,11 @@
  * Created with comment
  * @author: 武扬/956826374@qq.com
  * @time: 2018/10/16 下午1:51
+ // @flow
  */
 
-export const parseParams = (strParams = "") => {
+
+export const parseParams = (strParams:string = "") => {
     let string = strParams.split('&');
     let res = {};
     for (let i = 0; i < string.length; i++) {
@@ -16,7 +18,7 @@ export const parseParams = (strParams = "") => {
     return res;
 };
 
-export const stringifyParams = (jsonParams = {}) => {
+export const stringifyParams = (jsonParams:Object = {}) => {
     let arr = [];
     for (let i in jsonParams) {
         if (jsonParams.hasOwnProperty(i)) {
@@ -26,6 +28,6 @@ export const stringifyParams = (jsonParams = {}) => {
     return arr.join("&");
 };
 
-export const isLogin = (userInfo = {}) => {
+export const isLogin = (userInfo:Object = {}) => {
     return !!userInfo['id']
 };

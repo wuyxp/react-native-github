@@ -2,16 +2,22 @@
  * Created with comment
  * @author: 武扬/956826374@qq.com
  * @time: 2018/10/12 下午4:59
+ * @flow
  */
 import React,{ Component } from 'react'
+import { StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import {withNavigation} from 'react-navigation'
 import _ from 'lodash'
 import PropsType from 'prop-types'
 import {Header, Left, Body, Right, Title, Text, Icon, Button} from 'native-base'
-import { StatusBar } from 'react-native'
 
-class HeaderComponent extends Component{
+type Props = {
+    title: any,
+    backgroundColor: string,
+    leftComponent: Component<any>,
+}
+class HeaderComponent extends Component<Props>{
     render() {
         return (
             <Header  style={{backgroundColor: this.props.backgroundColor}}>
@@ -39,11 +45,8 @@ class HeaderComponent extends Component{
         ]),
         leftComponent: PropsType.element
     }
-    static defaultProps = {
-        title: ''
-    }
 }
-class LeftReturnComponent extends Component{
+class LeftReturnComponent extends Component<{navigation: Object}>{
     render() {
         return (
             <Button transparent onPress={() => {this.props.navigation.goBack()}}>
