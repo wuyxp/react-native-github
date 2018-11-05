@@ -110,8 +110,10 @@ class ViewScreen extends BaseComponent {
                     backgroundSpeed={10}
                 >
                     <View style={{position:'absolute', top: -300, width: Dimensions.get('window').width}}>
-                        <View style={{marginTop: 25,}}>
-                            <Icon name='ios-arrow-back' active style={{color: '#fff', marginLeft: 10}} onPress={() => this.props.navigation.pop()}/>
+                        <View style={{marginTop: 40,}}>
+                            <TouchableOpacity onPress={() => {this.props.navigation.pop()}}>
+                                <Icon name='ios-arrow-back' active style={{color: '#fff', marginLeft: 10}}/>
+                            </TouchableOpacity>
                         </View>
                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
                             <Avatar avatar_url={this.repoData.owner.avatar_url}/>
