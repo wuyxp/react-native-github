@@ -55,6 +55,7 @@ class LeftReturnComponent extends Component<{navigation: Object}>{
         )
     }
 }
+
 export const LeftReturn = withNavigation(LeftReturnComponent);
 const mapStateToProps = state => ({backgroundColor: state.theme.color});
 const mapDispatchToProps = () => ({});

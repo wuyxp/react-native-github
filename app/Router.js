@@ -21,6 +21,7 @@ import Login from './view/my/Login'
 
 // 设置系列
 import ColorList from './view/settings/ColorList'
+import WebBlog from './view/settings/WebBlog'
 
 // 项目系列
 import ReposDetail from './view/repos/Detail'
@@ -86,6 +87,7 @@ const StackNavigator = createStackNavigator({
     reposIssues: {screen: ReposIssues},
     reposCode: {screen: ReposCode},
     ColorList: {screen: ColorList},
+    webBlog: {screen: WebBlog},
     Login: {screen: Login},
 }, {
     navigationOptions: ({navigation}) => ({

@@ -11,6 +11,7 @@ import _ from 'lodash'
 import BaseComponent from '../component/BaseComponent'
 import {Container, Content, ListItem, Left, Right, Body, Button, Icon, Text} from 'native-base'
 import Header from '../component/Header'
+import ListIconItem from '../component/ListIconItem'
 
 import {logout} from '../action/userInfo/logout'
 import {logout as account_logout} from '../action/account/logout'
@@ -47,22 +48,21 @@ class ViewScreen extends BaseComponent {
                     title={"设置"}
                 />
                 <Content>
-                    <ListItem icon onPress={() => {
-                        this.props.navigation.push("ColorList")
-                    }}>
-                        <Left>
-                            <Button style={{backgroundColor: this.props.themeColor}}>
-                                <Icon active name="film"/>
-                            </Button>
-                        </Left>
-                        <Body>
-                        <Text>颜色主题</Text>
-                        </Body>
-                        <Right>
-                            <Text>{this.props.themeColor}</Text>
-                            <Icon active name="arrow-forward"/>
-                        </Right>
-                    </ListItem>
+                    <ListIconItem
+                        onPress={() => {
+                            this.props.navigation.push("ColorList")
+                        }}
+                        icon={'film'}
+                        text={'颜色主题'}
+                        tipText={this.props.themeColor}
+                    />
+                    <ListIconItem
+                        onPress={() => {
+                            this.props.navigation.push("webBlog")
+                        }}
+                        icon={'md-globe'}
+                        text={'我的博客'}
+                    />
                     <View style={{
                         justifyContent: 'center',
                         alignItems: 'center',
