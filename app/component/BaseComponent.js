@@ -48,7 +48,11 @@ export default class BaseComponent extends Component {
         this.props.navigation.dispatch(this.getReposAction('reposDetail', repoData));
     };
 
+    toReposCode = repoData => {
+        this.props.navigation.dispatch(this.getReposAction('reposCode', repoData));
+    };
+
     toReposIssues = repoData => {
         this.props.navigation.dispatch(this.getReposAction('reposIssues', repoData));
-    }
+    };
 }

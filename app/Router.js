@@ -25,6 +25,7 @@ import ColorList from './view/settings/ColorList'
 // 项目系列
 import ReposDetail from './view/repos/Detail'
 import ReposIssues from './view/repos/Issues'
+import ReposCode from './view/repos/Code'
 
 const BottomTab = createBottomTabNavigator({
     Favorite: {screen: Favorite},
@@ -83,6 +84,7 @@ const StackNavigator = createStackNavigator({
     },
     reposDetail: {screen: ReposDetail},
     reposIssues: {screen: ReposIssues},
+    reposCode: {screen: ReposCode},
     ColorList: {screen: ColorList},
     Login: {screen: Login},
 }, {

@@ -140,7 +140,7 @@ class ViewScreen extends BaseComponent {
                     </View>
 
                         <ListIconItem
-                            onPress={() => {}}
+                            onPress={() => {this.toReposCode(this.repoData)}}
                             icon="md-code"
                             text="code"
                         />
