@@ -5,7 +5,7 @@
  * @flow
  */
 import React, {Component} from 'react'
-import {Container, View, Text, Segment, Button, ListItem, Body, Right, Icon, Left, Spinner, Content, List, Toast} from 'native-base'
+import {Container, View, Text, Button, ListItem, Body, Right, Icon, Left, Spinner, Content, List, Toast, Card, CardItem} from 'native-base'
 import {connect} from 'react-redux'
 import Header,{ LeftReturn } from '../../component/Header'
 import _ from 'lodash';
@@ -21,8 +21,10 @@ class ViewScreen extends BaseComponent {
         this.state = {
             path: [],
             tree: [],
+            blob: "",
             toTreeIng: false,
             branch : 'master',
+            isDetail: false,
         };
         const {navigation} = this.props;
         this.repoData = navigation.getParam('repoData');
@@ -45,7 +47,7 @@ class ViewScreen extends BaseComponent {
 
     setPath = async (sha = 'master') => {
         const path = await this.loadPath(sha);
-        console.log('----获取master下的bobl');
+        console.log('----获取master下的path');
         console.log(path);
         const tree = _.get(path, 'data.tree', []);
         this.setState({
@@ -53,9 +55,22 @@ class ViewScreen extends BaseComponent {
             toTreeIng: false,
         })
     }
+    setBlob = async (sha = 'master') => {
+        const path = await this.loadBlob(sha);
+        console.log('----获取master下的bobl');
+        const blob = _.get(path, "data", "");
+        console.log(blob);
+        this.setState({
+            blob,
+            toTreeIng: false,
+        })
 
+    }
     loadPath = (sha = 'master') => {
         return this.github.getRepo(this.repoData.owner.login, this.repoData.name).getTree(sha);
+    }
+    loadBlob = (sha = 'master') => {
+        return this.github.getRepo(this.repoData.owner.login, this.repoData.name).getBlob(sha);
     }
     toTree = async item => {
         console.log('要进入的tree是');
@@ -68,22 +83,65 @@ class ViewScreen extends BaseComponent {
         }
         this.setState(() => ({
             toTreeIng: true,
-            path: [...path, item]
         }));
-        await this.setPath(item.sha);
+        if(item.type === 'blob'){
+            this.setState({
+                isDetail: true,
+            });
+            await this.setBlob(item.sha);
+        }else{
+            this.setState({
+                isDetail: false,
+            });
+            await this.setPath(item.sha);
+        }
     }
     forwardTree = async item => {
-        const {path, toTreeIng} = this.state;
-        if(toTreeIng){
-            Toast.show({
-                text: '正在请求，请稍后'
-            })
-        }
+        const {path} = this.state;
         this.setState(() => ({
-            toTreeIng: true,
             path: _.slice(path, 0, _.findIndex(path, i => i.sha === item.sha)+1)
         }));
-        await this.setPath(item.sha);
+        await this.toTree(item);
+    }
+    backTree = async item => {
+        const {path} = this.state;
+        this.setState(() => ({
+            path: [...path, item]
+        }));
+        await this.toTree(item);
+    }
+    renderList = () => {
+        return(
+            <List>
+                {
+                    this.state.tree.map(item => {
+                        return (
+                            <ListIconItem
+                                key={item.sha}
+                                icon={item.type === 'blob' ? "md-paper" : "md-folder-open"}
+                                tipText={item.size}
+                                onPress={() => this.backTree(item)}
+                                text={item.path}
+                            />
+                        )
+                    })
+                }
+            </List>
+        )
+    };
+    renderDetail = () => {
+        const blobArr = this.state.blob.split('\n');
+        return (
+            <Card style={{flex: 0}}>
+                <CardItem>
+                    <Body>
+                    {
+                        blobArr.map((text, index) => <Text key={index}>{text}</Text>)
+                    }
+                    </Body>
+                </CardItem>
+            </Card>
+        )
     }
     render() {
         return (
@@ -92,7 +150,6 @@ class ViewScreen extends BaseComponent {
                     title={this.repoData.name}
                     leftComponent={<LeftReturn/>}
                 />
-                <Content>
                     <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
                         {
                             this.state.path.map(item => {
@@ -105,21 +162,10 @@ class ViewScreen extends BaseComponent {
                             })
                         }
                     </View>
-                    <List>
-                        {
-                            this.state.tree.map(item => {
-                                return (
-                                    <ListIconItem
-                                        key={item.sha}
-                                        icon={item.type === 'blob' ? "md-paper" : "md-folder-open"}
-                                        tipText={item.size}
-                                        onPress={() => this.toTree(item)}
-                                        text={item.path}
-                                    />
-                                )
-                            })
-                        }
-                    </List>
+                <Content>
+                    {
+                        this.state.isDetail ? this.renderDetail() : this.renderList()
+                    }
                 </Content>
             </Container>
         )
