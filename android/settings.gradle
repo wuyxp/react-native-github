@@ -1,4 +1,6 @@
 rootProject.name = 'rn_demo'
+include ':react-native-code-push'
+project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-code-push/android/app')
 include ':rn-splash-screen'
 project(':rn-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/rn-splash-screen/android')
 include ':react-native-blur'

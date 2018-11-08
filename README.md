@@ -68,11 +68,16 @@
 
 - 在使用github-tools的api时，因为有获取全部列表bug的代码属于v3.0.0目前是在npmjs的网站上发布，为了解决这个问题，我采用了是github上他们v3.1.0版本，并且自己编译，将编译后的dist文件放入到node_module中
 ```
+// 创建新目录并进入
+mkdir tmp && cd tmp
 // 找一个临时目录需要clone下来当前文件
 git clone git@github.com:github-tools/github.git
+npm install
+
 // 切换版本
 git co v3.1.0
 // 将生成的dist目录拷贝到node_module文件夹中
+npm run build
 // cp -r ....
 // 删除这个临时目录
 // rm -rf .....

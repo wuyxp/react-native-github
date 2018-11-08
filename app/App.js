@@ -5,8 +5,10 @@
  */
 
 import React, {Component} from 'react';
+import {AppState} from 'react-native'
 import {Root} from 'native-base'
 import { Provider } from 'react-redux'
+import codePush from 'react-native-code-push'
 import store from './store'
 import Router from './Router'
 import SplashScreen from "rn-splash-screen";
@@ -20,6 +22,9 @@ export default class App extends Component<Props> {
     }
     componentDidMount(){
         SplashScreen.hide();
+        AppState.addEventListener("change", (newState) => {
+            newState === "active" && codePush.sync();
+        });
     }
     someEvent() {
         this.navigator && this.navigator.dispatch({ type: 'Navigate', });
